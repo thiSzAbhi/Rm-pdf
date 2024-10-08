@@ -1,34 +1,34 @@
-name: Remove PDF Watermark
+name: Remove PDF Watermark Action
 
 on:
   push:
     branches:
-      - main  # Adjust to your preferred branch
-  workflow_dispatch:  # Allow manual trigger
+      - main  # Or whichever branch you fancy!
+  workflow_dispatch:  # Let's you manually trigger this bad boy!
 
 jobs:
   remove-watermark:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout the code
         uses: actions/checkout@v2
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.8'  # Adjust the Python version if needed
+          python-version: '3.8'  # Use any Python version you like
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install PyMuPDF requests
 
-      - name: Download PDF and Remove Watermark
+      - name: Run the watermark remover tool
         run: python remove_watermarks.py
 
-      - name: Upload Modified PDF
+      - name: Upload the cleaned PDF
         uses: actions/upload-artifact@v2
         with:
-          name: modified-pdf
-          path: output.pdf  # The output PDF with removed watermarks
+          name: cleaned-pdf
+          path: output.pdf  # That's your watermark-free PDF!
