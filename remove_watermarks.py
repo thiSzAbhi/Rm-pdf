@@ -8,7 +8,7 @@ def remove_watermarks(input_pdf_path, output_pdf_path):
         text_blocks = page.get_text("blocks")
 
         for block in text_blocks:
-            if 'WATERMARK' in block[4]:  # Change 'WATERMARK' to your watermark text
+            if 'WATERMARK' in block[4]:  # Adjust 'WATERMARK' to the actual text if needed
                 page.delete_text(block[:4])
 
         for img_index in range(len(page.get_images(full=True))):
@@ -26,10 +26,15 @@ def download_pdf(url, output_path):
         f.write(response.content)
 
 if __name__ == "__main__":
-    # Replace with the URL of the PDF to download and watermark removal text
-    pdf_url = "https://example.com/your-pdf.pdf"  # Change to your PDF URL
+    # 🔥 Put the URL of the PDF you want to download and remove watermarks from
+    pdf_url = "https://example.com/your-pdf.pdf"  # Update this with your real PDF URL
     downloaded_pdf = "downloaded.pdf"
     output_pdf = "output.pdf"
 
+    print("Downloading PDF...")
     download_pdf(pdf_url, downloaded_pdf)
+    
+    print("Removing watermarks...")
     remove_watermarks(downloaded_pdf, output_pdf)
+
+    print("Done! 🏁 PDF saved without watermarks as:", output_pdf)
